@@ -1,0 +1,16 @@
+{
+  "name": "ssjs-utils",
+  "version": "1.0.0",
+  "author": "Steel Sky",
+  "license": "MIT",
+  "main": "dist/ssjs-utils.cjs.js",
+  "module": "dist/ssjs-utils.esm.js",
+  "browser": "dist/ssjs-utils.umd.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "rollup": "^2.23.0"
+  }
+}
