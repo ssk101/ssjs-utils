@@ -84,6 +84,17 @@ function snakeCase(str) {
   return sentenceCase(str).replace(/[ ]/g, '_')
 }
 
+function humanCase(str) {
+  str || (str = '');
+  return str
+    .replace(/([A-Z])/g, (_, match) => ' ' + match.toLowerCase())
+    .replace(/[_\- ]+(.)/g, ' $1')
+    .trim()
+    .split(' ')
+    .map(s => s.charAt(0).toUpperCase() + s.slice(1))
+    .join(' ')
+}
+
 function validUrl(s = '') {
   const REGEX = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
   return s.match(REGEX)
@@ -97,11 +108,23 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+function clamp(val, min, max) {
+  return Math.max(+min, Math.min(+val, +max))
+}
+
 function randomDate(min = 18, max = 90) {
   return +moment()
     .subtract(Math.floor(Math.random() * (max - min + 1)) + min + 1, 'years')
     .add(Math.floor(Math.random() * 12) + 1, 'months')
     .add(Math.floor(Math.random() * 31) + 1, 'days')
+}
+
+function imgFromBuffer(buffer) {
+  if(!buffer) return ''
+  const base64 = btoa(
+    buffer.data.reduce((data, byte) => data + String.fromCharCode(byte), '')
+  );
+  return `data:image/png;base64,${base64}`
 }
 
 function randomItems(arr, amount = 1, probabilities = {}) {
@@ -130,4 +153,4 @@ function randomItems(arr, amount = 1, probabilities = {}) {
   return ret
 }
 
-export { camelCase, camelKeys, kebabCase, objectToStyle, objectWithPath, probability, randomDate, randomInt, randomItems, sentenceCase, snakeCase, validUrl };
+export { camelCase, camelKeys, clamp, humanCase, imgFromBuffer, kebabCase, objectToStyle, objectWithPath, probability, randomDate, randomInt, randomItems, sentenceCase, snakeCase, validUrl };

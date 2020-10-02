@@ -88,6 +88,17 @@
     return sentenceCase(str).replace(/[ ]/g, '_')
   }
 
+  function humanCase(str) {
+    str || (str = '');
+    return str
+      .replace(/([A-Z])/g, (_, match) => ' ' + match.toLowerCase())
+      .replace(/[_\- ]+(.)/g, ' $1')
+      .trim()
+      .split(' ')
+      .map(s => s.charAt(0).toUpperCase() + s.slice(1))
+      .join(' ')
+  }
+
   function validUrl(s = '') {
     const REGEX = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
     return s.match(REGEX)
@@ -99,6 +110,10 @@
 
   function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
+  function clamp(val, min, max) {
+    return Math.max(+min, Math.min(+val, +max))
   }
 
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -5789,6 +5804,14 @@
       .add(Math.floor(Math.random() * 31) + 1, 'days')
   }
 
+  function imgFromBuffer(buffer) {
+    if(!buffer) return ''
+    const base64 = btoa(
+      buffer.data.reduce((data, byte) => data + String.fromCharCode(byte), '')
+    );
+    return `data:image/png;base64,${base64}`
+  }
+
   function randomItems(arr, amount = 1, probabilities = {}) {
     if(!amount) return
 
@@ -5817,6 +5840,9 @@
 
   exports.camelCase = camelCase;
   exports.camelKeys = camelKeys;
+  exports.clamp = clamp;
+  exports.humanCase = humanCase;
+  exports.imgFromBuffer = imgFromBuffer;
   exports.kebabCase = kebabCase;
   exports.objectToStyle = objectToStyle;
   exports.objectWithPath = objectWithPath;
