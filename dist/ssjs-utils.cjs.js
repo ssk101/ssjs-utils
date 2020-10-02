@@ -36,6 +36,21 @@ function camelKeys(o, seen = []) {
   return o
 }
 
+function camelize(obj) {
+  if(Array.isArray(obj)) {
+    return obj.map(v => camelize(v))
+  } else if(obj != null && obj.constructor === Object) {
+    return Object.keys(obj).reduce(
+      (result, key) => ({
+        ...result,
+        [camelCase(key)]: camelize(obj[key]),
+      }),
+      {},
+    )
+  }
+  return obj
+}
+
 function kebabCase(str) {
   return sentenceCase(str).replace(/[ ]/g, '-')
 }
@@ -159,11 +174,30 @@ function randomItems(arr, amount = 1, probabilities = {}) {
   return ret
 }
 
+function varsToHex(obj, raw) {
+  return Object.keys(obj).reduce((acc, val) => {
+    acc[val] = +`0x${+raw[`--${obj[val]}`].replace(/#/, '')}`;
+    return acc
+  }, {})
+}
+
+function jsonToCSS(json) {
+  return Object.keys(json).reduce((acc, tag) => {
+    acc += tag;
+    acc += JSON.stringify(json[tag])
+      .replace(/"/g, '')
+      .replace(/,/g, ';');
+    return acc
+  }, '')
+}
+
 exports.camelCase = camelCase;
 exports.camelKeys = camelKeys;
+exports.camelize = camelize;
 exports.clamp = clamp;
 exports.humanCase = humanCase;
 exports.imgFromBuffer = imgFromBuffer;
+exports.jsonToCSS = jsonToCSS;
 exports.kebabCase = kebabCase;
 exports.objectToStyle = objectToStyle;
 exports.objectWithPath = objectWithPath;
@@ -174,3 +208,4 @@ exports.randomItems = randomItems;
 exports.sentenceCase = sentenceCase;
 exports.snakeCase = snakeCase;
 exports.validUrl = validUrl;
+exports.varsToHex = varsToHex;
