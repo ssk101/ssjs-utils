@@ -1,4 +1,5 @@
 import commonjs from '@rollup/plugin-commonjs'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
 import pkg from './package.json'
 
 export default [
@@ -7,9 +8,10 @@ export default [
 		output: {
 			name: 'ssjs-utils',
 			file: pkg.browser,
-			format: 'umd'
+			format: 'umd',
 		},
 		plugins: [
+			nodeResolve(),
 			commonjs(),
 		]
 	},
