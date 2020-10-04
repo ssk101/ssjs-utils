@@ -5827,6 +5827,27 @@
     return `data:image/png;base64,${base64}`
   }
 
+  async function imgFromBlob(blob) {
+    if(!blob) return ''
+
+    const reader = new FileReader();
+
+    reader.readAsDataURL(blob);
+
+    return new Promise(resolve => {
+      reader.onloadend = () => resolve(reader.result);
+    })
+  }
+
+  function resizeWithAspectRatio(srcWidth, srcHeight, maxWidth, maxHeight) {
+    const ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+
+    return {
+      width: srcWidth * ratio,
+      height: srcHeight * ratio,
+    }
+  }
+
   function randomItems(arr, amount = 1, probabilities = {}) {
     if(!amount) return
 
@@ -5875,6 +5896,7 @@
   exports.camelize = camelize;
   exports.clamp = clamp;
   exports.humanCase = humanCase;
+  exports.imgFromBlob = imgFromBlob;
   exports.imgFromBuffer = imgFromBuffer;
   exports.jsonToCSS = jsonToCSS;
   exports.kebabCase = kebabCase;
@@ -5884,6 +5906,7 @@
   exports.randomDate = randomDate;
   exports.randomInt = randomInt;
   exports.randomItems = randomItems;
+  exports.resizeWithAspectRatio = resizeWithAspectRatio;
   exports.sentenceCase = sentenceCase;
   exports.snakeCase = snakeCase;
   exports.validUrl = validUrl;
