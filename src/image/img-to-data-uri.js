@@ -14,7 +14,7 @@ export function imgToDataUri(src, maxWidth, maxHeight, keepAspect = true) {
         canvas,
         keepAspect
           ? resizeWithAspectRatio(srcWidth, srcHeight, maxWidth, maxHeight)
-          : width: maxWidth, height: maxHeight
+          : { width: maxWidth, height: maxHeight }
       )
 
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height)

@@ -171,7 +171,7 @@ function resizeWithAspectRatio(srcWidth, srcHeight, maxWidth, maxHeight) {
   }
 }
 
-function imgToDataUri(src, maxWidth, maxHeight) {
+function imgToDataUri(src, maxWidth, maxHeight, keepAspect = true) {
   if(typeof document === 'undefined') {
     throw new Error('Must run in browser context')
   }
@@ -183,7 +183,9 @@ function imgToDataUri(src, maxWidth, maxHeight) {
 
       Object.assign(
         canvas,
-        resizeWithAspectRatio(srcWidth, srcHeight, maxWidth, maxHeight)
+        keepAspect
+          ? resizeWithAspectRatio(srcWidth, srcHeight, maxWidth, maxHeight)
+          : { width: maxWidth, height: maxHeight }
       );
 
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
