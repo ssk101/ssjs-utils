@@ -134,12 +134,20 @@ function randomDate(min = 18, max = 90) {
     .add(Math.floor(Math.random() * 31) + 1, 'days')
 }
 
-function imgFromBuffer(buffer) {
+function imgFromBuffer(buffer, type = 'png') {
   if(!buffer) return ''
-  const base64 = btoa(
-    buffer.data.reduce((data, byte) => data + String.fromCharCode(byte), '')
-  );
-  return `data:image/png;base64,${base64}`
+
+  const base64 = (() => {
+    if(typeof btoa === 'function') {
+      return btoa(
+        buffer.data.reduce((data, byte) => data + String.fromCharCode(byte), '')
+      )
+    }
+    return Buffer.from(buffer).toString('base64')
+
+  })();
+
+  return `data:image/${type};base64,${base64}`
 }
 
 async function imgFromBlob(blob) {
