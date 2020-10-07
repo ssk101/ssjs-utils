@@ -171,6 +171,35 @@ function resizeWithAspectRatio(srcWidth, srcHeight, maxWidth, maxHeight) {
   }
 }
 
+function imgToDataUri(src, maxWidth, maxHeight) {
+  if(typeof document === 'undefined') {
+    throw new Error('Must run in browser context')
+  }
+
+  return new Promise(resolve => {
+    const draw = (srcWidth, srcHeight) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      Object.assign(
+        canvas,
+        resizeWithAspectRatio(srcWidth, srcHeight, maxWidth, maxHeight)
+      );
+
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      return canvas.toDataURL()
+    };
+
+    const img = new Image;
+    img.src = src;
+
+    img.onload = () => {
+      resolve(draw(img.width, img.height));
+    };
+  })
+}
+
 function randomItems(arr, amount = 1, probabilities = {}) {
   if(!amount) return
 
@@ -214,4 +243,4 @@ function jsonToCSS(json) {
   }, '')
 }
 
-export { camelCase, camelKeys, camelize, clamp, humanCase, imgFromBlob, imgFromBuffer, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomDate, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validUrl, varsToHex };
+export { camelCase, camelKeys, camelize, clamp, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomDate, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validUrl, varsToHex };

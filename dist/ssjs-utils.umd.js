@@ -2681,8 +2681,7 @@
       hooks.createFromInputFallback = deprecate(
           'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
               'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
-              'discouraged and will be removed in an upcoming major release. Please refer to ' +
-              'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
+              'discouraged. Please refer to http://momentjs.com/guides/#/warnings/js-date/ for more info.',
           function (config) {
               config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
           }
@@ -5762,7 +5761,7 @@
 
       //! moment.js
 
-      hooks.version = '2.29.0';
+      hooks.version = '2.29.1';
 
       setHookCallback(createLocal);
 
@@ -5856,6 +5855,35 @@
     }
   }
 
+  function imgToDataUri(src, maxWidth, maxHeight) {
+    if(typeof document === 'undefined') {
+      throw new Error('Must run in browser context')
+    }
+
+    return new Promise(resolve => {
+      const draw = (srcWidth, srcHeight) => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        Object.assign(
+          canvas,
+          resizeWithAspectRatio(srcWidth, srcHeight, maxWidth, maxHeight)
+        );
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        return canvas.toDataURL()
+      };
+
+      const img = new Image;
+      img.src = src;
+
+      img.onload = () => {
+        resolve(draw(img.width, img.height));
+      };
+    })
+  }
+
   function randomItems(arr, amount = 1, probabilities = {}) {
     if(!amount) return
 
@@ -5906,6 +5934,7 @@
   exports.humanCase = humanCase;
   exports.imgFromBlob = imgFromBlob;
   exports.imgFromBuffer = imgFromBuffer;
+  exports.imgToDataUri = imgToDataUri;
   exports.jsonToCSS = jsonToCSS;
   exports.kebabCase = kebabCase;
   exports.objectToStyle = objectToStyle;
