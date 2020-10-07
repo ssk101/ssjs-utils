@@ -10,11 +10,13 @@ export function imgToDataUri(src, maxWidth, maxHeight, keepAspect = true) {
       const canvas = document.createElement('canvas')
       const ctx = canvas.getContext('2d')
 
+      const dimensions = [ maxWidth || srcWidth, maxHeight || srcHeight ]
+
       Object.assign(
         canvas,
         keepAspect
-          ? resizeWithAspectRatio(srcWidth, srcHeight, maxWidth, maxHeight)
-          : { width: maxWidth, height: maxHeight }
+          ? resizeWithAspectRatio(srcWidth, srcHeight, dimensions[0], dimensions[1])
+          : { width: dimensions[0], height: dimensions[1] }
       )
 
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
