@@ -1,3 +1,3 @@
-# ssjs-utils
+# jsutils
 
 Collection of various utilities for JavaScript.
