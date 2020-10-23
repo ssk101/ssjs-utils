@@ -5,6 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var moment = _interopDefault(require('moment'));
+var crypto = _interopDefault(require('crypto'));
 
 function sentenceCase(str) {
   str || (str = '');
@@ -253,10 +254,33 @@ function jsonToCSS(json) {
   }, '')
 }
 
+const algorithm = 'aes-256-ctr';
+const secretKey = process.env.SALT;
+const iv = crypto.randomBytes(16);
+
+function encrypt(text, key) {
+  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+  const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
+  return {
+    iv: iv.toString('hex'),
+    content: encrypted.toString('hex'),
+  }
+}
+
+function decrypt(hash) {
+  const decipher = crypto
+    .createDecipheriv(algorithm, secretKey, Buffer.from(hash.iv, 'hex'));
+  const decrpyted = Buffer
+    .concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
+  return decrpyted.toString()
+}
+
 exports.camelCase = camelCase;
 exports.camelKeys = camelKeys;
 exports.camelize = camelize;
 exports.clamp = clamp;
+exports.decrypt = decrypt;
+exports.encrypt = encrypt;
 exports.humanCase = humanCase;
 exports.imgFromBlob = imgFromBlob;
 exports.imgFromBuffer = imgFromBuffer;

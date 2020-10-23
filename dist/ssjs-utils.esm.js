@@ -1,4 +1,5 @@
 import moment from 'moment';
+import crypto from 'crypto';
 
 function sentenceCase(str) {
   str || (str = '');
@@ -247,4 +248,25 @@ function jsonToCSS(json) {
   }, '')
 }
 
-export { camelCase, camelKeys, camelize, clamp, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomDate, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validUrl, varsToHex };
+const algorithm = 'aes-256-ctr';
+const secretKey = process.env.SALT;
+const iv = crypto.randomBytes(16);
+
+function encrypt(text, key) {
+  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+  const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
+  return {
+    iv: iv.toString('hex'),
+    content: encrypted.toString('hex'),
+  }
+}
+
+function decrypt(hash) {
+  const decipher = crypto
+    .createDecipheriv(algorithm, secretKey, Buffer.from(hash.iv, 'hex'));
+  const decrpyted = Buffer
+    .concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
+  return decrpyted.toString()
+}
+
+export { camelCase, camelKeys, camelize, clamp, decrypt, encrypt, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomDate, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validUrl, varsToHex };

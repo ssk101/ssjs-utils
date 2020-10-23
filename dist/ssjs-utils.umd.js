@@ -1,8 +1,10 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['ssjs-utils'] = {}));
-}(this, (function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('crypto')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'crypto'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['ssjs-utils'] = {}, global.crypto));
+}(this, (function (exports, crypto) { 'use strict';
+
+  crypto = crypto && Object.prototype.hasOwnProperty.call(crypto, 'default') ? crypto['default'] : crypto;
 
   function sentenceCase(str) {
     str || (str = '');
@@ -5931,10 +5933,33 @@
     }, '')
   }
 
+  const algorithm = 'aes-256-ctr';
+  const secretKey = process.env.SALT;
+  const iv = crypto.randomBytes(16);
+
+  function encrypt(text, key) {
+    const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+    const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
+    return {
+      iv: iv.toString('hex'),
+      content: encrypted.toString('hex'),
+    }
+  }
+
+  function decrypt(hash) {
+    const decipher = crypto
+      .createDecipheriv(algorithm, secretKey, Buffer.from(hash.iv, 'hex'));
+    const decrpyted = Buffer
+      .concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
+    return decrpyted.toString()
+  }
+
   exports.camelCase = camelCase;
   exports.camelKeys = camelKeys;
   exports.camelize = camelize;
   exports.clamp = clamp;
+  exports.decrypt = decrypt;
+  exports.encrypt = encrypt;
   exports.humanCase = humanCase;
   exports.imgFromBlob = imgFromBlob;
   exports.imgFromBuffer = imgFromBuffer;
