@@ -1,9 +1,7 @@
 import { randomItems } from './array/random-items.js'
-import { encryptFile, decryptFile } from './crypto/encrypt.js'
 import { jsonToCSS } from './css/json-to-css.js'
 import { varsToHex } from './css/vars-to-hex.js'
 import { PrettyDate } from './date/pretty-date.js'
-import { randomDate } from './date/random-date.js'
 import { imgFromBlob } from './image/img-from-blob.js'
 import { imgFromBuffer } from './image/img-from-buffer.js'
 import { imgToDataUri } from './image/img-to-data-uri.js'
@@ -21,3 +19,27 @@ import { kebabCase } from './string/kebab-case.js'
 import { sentenceCase } from './string/sentence-case.js'
 import { snakeCase } from './string/snake-case.js'
 import { validURL } from './string/valid-url.js'
+
+export default {
+  randomItems,
+  jsonToCSS,
+  varsToHex,
+  PrettyDate,
+  imgFromBlob,
+  imgFromBuffer,
+  imgToDataUri,
+  resizeWithAspectRatio,
+  clamp,
+  probability,
+  randomInt,
+  camelKeys,
+  camelize,
+  objectToStyle,
+  objectWithPath,
+  camelCase,
+  humanCase,
+  kebabCase,
+  sentenceCase,
+  snakeCase,
+  validURL,
+}

@@ -1,8 +1,11 @@
-import 'moment';
+'use strict';
 
-const path = require('path');
-const fs = require('fs');
-const crypto = require('crypto');
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+require('path');
+var fs = _interopDefault(require('fs'));
+var crypto = _interopDefault(require('crypto'));
+
 const algorithm = 'aes-256-ctr';
 const iv = crypto.randomBytes(16);
 
@@ -65,4 +68,13 @@ function decryptFile(inFile, outFile, key, opts = { mode: 'binary' }) {
   }
 }
 
-module.exports = { encryptFile, decryptFile };
+var encrypt = { encryptFile, decryptFile };
+
+const { encryptFile: encryptFile$1, decryptFile: decryptFile$1 } = encrypt;
+
+var cjs = {
+  encryptFile: encryptFile$1,
+  decryptFile: decryptFile$1,
+};
+
+module.exports = cjs;
