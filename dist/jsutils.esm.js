@@ -256,28 +256,4 @@ function validURL(s = '') {
   return s.match(REGEX)
 }
 
-var esm = {
-  randomItems,
-  jsonToCSS,
-  varsToHex,
-  PrettyDate,
-  imgFromBlob,
-  imgFromBuffer,
-  imgToDataUri,
-  resizeWithAspectRatio,
-  clamp,
-  probability,
-  randomInt,
-  camelKeys,
-  camelize,
-  objectToStyle,
-  objectWithPath,
-  camelCase,
-  humanCase,
-  kebabCase,
-  sentenceCase,
-  snakeCase,
-  validURL,
-};
-
-export default esm;
+export { PrettyDate, camelCase, camelKeys, camelize, clamp, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validURL, varsToHex };
