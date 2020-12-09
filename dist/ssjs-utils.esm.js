@@ -135,6 +135,24 @@ function randomDate(min = 18, max = 90) {
     .add(Math.floor(Math.random() * 31) + 1, 'days')
 }
 
+function PrettyDate(v) {
+  const pad = (v) => String(v).padStart(2, 0);
+
+  const date = new Date(v);
+
+  return [
+    date.getFullYear(),
+    '/',
+    date.getMonth() + 1,
+    '/',
+    date.getDate(),
+    ' ',
+    pad(date.getHours()),
+    ':',
+    pad(date.getMinutes()),
+  ].join('')
+}
+
 function imgFromBuffer(buffer, type = 'png') {
   if(!buffer) return ''
 
@@ -269,4 +287,4 @@ function decrypt(hash) {
   return decrpyted.toString()
 }
 
-export { camelCase, camelKeys, camelize, clamp, decrypt, encrypt, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomDate, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validUrl, varsToHex };
+export { PrettyDate, camelCase, camelKeys, camelize, clamp, decrypt, encrypt, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomDate, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validUrl, varsToHex };

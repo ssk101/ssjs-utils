@@ -2683,7 +2683,8 @@
       hooks.createFromInputFallback = deprecate(
           'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
               'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
-              'discouraged. Please refer to http://momentjs.com/guides/#/warnings/js-date/ for more info.',
+              'discouraged and will be removed in an upcoming major release. Please refer to ' +
+              'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
           function (config) {
               config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
           }
@@ -5763,7 +5764,7 @@
 
       //! moment.js
 
-      hooks.version = '2.29.1';
+      hooks.version = '2.29.0';
 
       setHookCallback(createLocal);
 
@@ -5818,6 +5819,24 @@
       .subtract(Math.floor(Math.random() * (max - min + 1)) + min + 1, 'years')
       .add(Math.floor(Math.random() * 12) + 1, 'months')
       .add(Math.floor(Math.random() * 31) + 1, 'days')
+  }
+
+  function PrettyDate(v) {
+    const pad = (v) => String(v).padStart(2, 0);
+
+    const date = new Date(v);
+
+    return [
+      date.getFullYear(),
+      '/',
+      date.getMonth() + 1,
+      '/',
+      date.getDate(),
+      ' ',
+      pad(date.getHours()),
+      ':',
+      pad(date.getMinutes()),
+    ].join('')
   }
 
   function imgFromBuffer(buffer, type = 'png') {
@@ -5954,6 +5973,7 @@
     return decrpyted.toString()
   }
 
+  exports.PrettyDate = PrettyDate;
   exports.camelCase = camelCase;
   exports.camelKeys = camelKeys;
   exports.camelize = camelize;
