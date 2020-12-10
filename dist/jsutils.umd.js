@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.jsutils = factory());
-}(this, (function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.jsutils = {}));
+}(this, (function (exports) { 'use strict';
 
   function probability(percentage = 50) {
     return Math.random() <= percentage / 100
@@ -262,30 +262,28 @@
     return s.match(REGEX)
   }
 
-  var umd = {
-    randomItems,
-    jsonToCSS,
-    varsToHex,
-    PrettyDate,
-    imgFromBlob,
-    imgFromBuffer,
-    imgToDataUri,
-    resizeWithAspectRatio,
-    clamp,
-    probability,
-    randomInt,
-    camelKeys,
-    camelize,
-    objectToStyle,
-    objectWithPath,
-    camelCase,
-    humanCase,
-    kebabCase,
-    sentenceCase,
-    snakeCase,
-    validURL,
-  };
+  exports.PrettyDate = PrettyDate;
+  exports.camelCase = camelCase;
+  exports.camelKeys = camelKeys;
+  exports.camelize = camelize;
+  exports.clamp = clamp;
+  exports.humanCase = humanCase;
+  exports.imgFromBlob = imgFromBlob;
+  exports.imgFromBuffer = imgFromBuffer;
+  exports.imgToDataUri = imgToDataUri;
+  exports.jsonToCSS = jsonToCSS;
+  exports.kebabCase = kebabCase;
+  exports.objectToStyle = objectToStyle;
+  exports.objectWithPath = objectWithPath;
+  exports.probability = probability;
+  exports.randomInt = randomInt;
+  exports.randomItems = randomItems;
+  exports.resizeWithAspectRatio = resizeWithAspectRatio;
+  exports.sentenceCase = sentenceCase;
+  exports.snakeCase = snakeCase;
+  exports.validURL = validURL;
+  exports.varsToHex = varsToHex;
 
-  return umd;
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

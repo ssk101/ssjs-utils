@@ -4,21 +4,21 @@ import pkg from './package.json'
 
 export default [
   {
-    input: './src/umd.js',
+    input: './src/index.js',
     output: {
       name: 'jsutils',
       file: pkg.browser,
       format: 'umd',
     },
   }, {
-    input: './src/esm.js',
+    input: './src/index.js',
     output: {
       name: 'jsutils',
       file: pkg.module,
       format: 'esm',
     },
   }, {
-    input: './src/cjs.js',
+    input: './src/index.js',
     output: {
       name: 'jsutils',
       file: pkg.main,
