@@ -69,6 +69,28 @@
     ].join('')
   }
 
+  function PrettyTime(v) {
+    const pad = (v) => String(v).padStart(2, 0);
+
+    const date = new Date(v);
+
+    return [
+      date.getFullYear(),
+      '/',
+      date.getMonth() + 1,
+      '/',
+      date.getDate(),
+      ' ',
+      pad(date.getHours()),
+      ':',
+      pad(date.getMinutes()),
+      ':',
+      pad(date.getSeconds()),
+      '.',
+      pad(date.getMilliseconds()),
+    ].join('')
+  }
+
   async function imgFromBlob(blob) {
     if(!blob) return ''
 
@@ -263,6 +285,7 @@
   }
 
   exports.PrettyDate = PrettyDate;
+  exports.PrettyTime = PrettyTime;
   exports.camelCase = camelCase;
   exports.camelKeys = camelKeys;
   exports.camelize = camelize;

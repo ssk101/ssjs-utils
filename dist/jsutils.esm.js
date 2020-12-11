@@ -63,6 +63,28 @@ function PrettyDate(v) {
   ].join('')
 }
 
+function PrettyTime(v) {
+  const pad = (v) => String(v).padStart(2, 0);
+
+  const date = new Date(v);
+
+  return [
+    date.getFullYear(),
+    '/',
+    date.getMonth() + 1,
+    '/',
+    date.getDate(),
+    ' ',
+    pad(date.getHours()),
+    ':',
+    pad(date.getMinutes()),
+    ':',
+    pad(date.getSeconds()),
+    '.',
+    pad(date.getMilliseconds()),
+  ].join('')
+}
+
 async function imgFromBlob(blob) {
   if(!blob) return ''
 
@@ -256,4 +278,4 @@ function validURL(s = '') {
   return s.match(REGEX)
 }
 
-export { PrettyDate, camelCase, camelKeys, camelize, clamp, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validURL, varsToHex };
+export { PrettyDate, PrettyTime, camelCase, camelKeys, camelize, clamp, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validURL, varsToHex };

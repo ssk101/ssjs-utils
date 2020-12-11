@@ -13,9 +13,9 @@ export function PrettyTime(v) {
     pad(date.getHours()),
     ':',
     pad(date.getMinutes()),
-    ':'
+    ':',
     pad(date.getSeconds()),
-    '.'
+    '.',
     pad(date.getMilliseconds()),
   ].join('')
 }
