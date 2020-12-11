@@ -71,9 +71,9 @@ function PrettyTime(v) {
   return [
     date.getFullYear(),
     '/',
-    date.getMonth() + 1,
+    pad(date.getMonth() + 1),
     '/',
-    date.getDate(),
+    pad(date.getDate()),
     ' ',
     pad(date.getHours()),
     ':',
