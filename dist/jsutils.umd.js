@@ -70,7 +70,7 @@
   }
 
   function PrettyTime(v) {
-    const pad = (v) => String(v).padStart(2, 0);
+    const pad = (v, c = 2) => String(v).padStart(c, 0);
 
     const date = new Date(v);
 
@@ -87,7 +87,7 @@
       ':',
       pad(date.getSeconds()),
       '.',
-      pad(date.getMilliseconds()),
+      pad(date.getMilliseconds(), 3),
     ].join('')
   }
 
