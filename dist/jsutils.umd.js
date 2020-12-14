@@ -273,6 +273,15 @@
     return sentenceCase(str).replace(/[ ]/g, '_')
   }
 
+  function abbreviationCase(str) {
+    let arr = [];
+    camelCase(str)
+      .replace(/^[a-z]|[A-Z]/g, (m) => {
+        arr.push(m);
+      });
+    return arr.join('').toUpperCase()
+  }
+
   function validURL(s = '') {
     const REGEX = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
     return s.match(REGEX)
@@ -280,6 +289,7 @@
 
   exports.PrettyDate = PrettyDate;
   exports.PrettyTime = PrettyTime;
+  exports.abbreviationCase = abbreviationCase;
   exports.camelCase = camelCase;
   exports.camelKeys = camelKeys;
   exports.camelize = camelize;

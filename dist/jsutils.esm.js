@@ -267,9 +267,18 @@ function snakeCase(str) {
   return sentenceCase(str).replace(/[ ]/g, '_')
 }
 
+function abbreviationCase(str) {
+  let arr = [];
+  camelCase(str)
+    .replace(/^[a-z]|[A-Z]/g, (m) => {
+      arr.push(m);
+    });
+  return arr.join('').toUpperCase()
+}
+
 function validURL(s = '') {
   const REGEX = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
   return s.match(REGEX)
 }
 
-export { PrettyDate, PrettyTime, camelCase, camelKeys, camelize, clamp, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validURL, varsToHex };
+export { PrettyDate, PrettyTime, abbreviationCase, camelCase, camelKeys, camelize, clamp, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validURL, varsToHex };
