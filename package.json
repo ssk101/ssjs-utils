@@ -1,6 +1,6 @@
 {
   "name": "jsutils",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "author": "Steel Sky",
   "license": "MIT",
   "main": "dist/jsutils.cjs.js",
