@@ -281,4 +281,11 @@ function validURL(s = '') {
   return s.match(REGEX)
 }
 
-export { PrettyDate, PrettyTime, abbreviationCase, camelCase, camelKeys, camelize, clamp, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validURL, varsToHex };
+function base36(min, max) {
+  return Math
+    .floor(Math.random() * (max - min + 1) + min)
+    .toString(36)
+    .toUpperCase()
+}
+
+export { PrettyDate, PrettyTime, abbreviationCase, base36, camelCase, camelKeys, camelize, clamp, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validURL, varsToHex };
