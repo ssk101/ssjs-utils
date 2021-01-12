@@ -202,6 +202,20 @@ function camelize(obj) {
   return obj
 }
 
+function snakeCase(str) {
+  return sentenceCase(str).replace(/[ ]/g, '_')
+}
+
+function snakeKeys(params, merge = {}) {
+  const ret = {};
+  const data = Object.assign({}, params, merge);
+  for(const k in data) {
+    ret[snakeCase(k)] = data[k];
+  }
+
+  return ret
+}
+
 function kebabCase(str) {
   return sentenceCase(str).replace(/[ ]/g, '-')
 }
@@ -263,10 +277,6 @@ function humanCase(str) {
     .join(' ')
 }
 
-function snakeCase(str) {
-  return sentenceCase(str).replace(/[ ]/g, '_')
-}
-
 function abbreviationCase(str) {
   let arr = [];
   camelCase(str)
@@ -288,4 +298,4 @@ function base36(min, max) {
     .toUpperCase()
 }
 
-export { PrettyDate, PrettyTime, abbreviationCase, base36, camelCase, camelKeys, camelize, clamp, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, validURL, varsToHex };
+export { PrettyDate, PrettyTime, abbreviationCase, base36, camelCase, camelKeys, camelize, clamp, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, snakeKeys, validURL, varsToHex };

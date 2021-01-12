@@ -208,6 +208,20 @@
     return obj
   }
 
+  function snakeCase(str) {
+    return sentenceCase(str).replace(/[ ]/g, '_')
+  }
+
+  function snakeKeys(params, merge = {}) {
+    const ret = {};
+    const data = Object.assign({}, params, merge);
+    for(const k in data) {
+      ret[snakeCase(k)] = data[k];
+    }
+
+    return ret
+  }
+
   function kebabCase(str) {
     return sentenceCase(str).replace(/[ ]/g, '-')
   }
@@ -269,10 +283,6 @@
       .join(' ')
   }
 
-  function snakeCase(str) {
-    return sentenceCase(str).replace(/[ ]/g, '_')
-  }
-
   function abbreviationCase(str) {
     let arr = [];
     camelCase(str)
@@ -316,6 +326,7 @@
   exports.resizeWithAspectRatio = resizeWithAspectRatio;
   exports.sentenceCase = sentenceCase;
   exports.snakeCase = snakeCase;
+  exports.snakeKeys = snakeKeys;
   exports.validURL = validURL;
   exports.varsToHex = varsToHex;
 
