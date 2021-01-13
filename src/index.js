@@ -1,6 +1,8 @@
 export { randomItems } from './array/random-items.js'
 export { jsonToCSS } from './css/json-to-css.js'
 export { varsToHex } from './css/vars-to-hex.js'
+export { blendHex } from './css/blend-hex.js'
+export { hexToRGB } from './css/hex-to-rgb.js'
 export { PrettyDate } from './date/pretty-date.js'
 export { PrettyTime } from './date/pretty-time.js'
 export { imgFromBlob } from './image/img-from-blob.js'

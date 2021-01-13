@@ -51,6 +51,50 @@
     }, {})
   }
 
+  function blendHex(from, to, bias = 0.5) {
+    let x;
+    let y = (
+      Math.round((to[0] - from[0]) * bias + from[0]) *
+      0x10000 +
+      Math.round((to[1] - from[1]) * bias + from[1]) *
+      0x100 +
+      Math.round((to[2] - from[2]) * bias + from[2])
+    );
+
+    if(((from[3]) > -1 && to[3] > -1)) {
+      x = Math.round(((to[3] - from[3]) * bias + from[3]) * 255);
+    }
+    else if(to[3] > -1) {
+      x = Math.round(to[3] * 255);
+    }
+    else if(from[3] > -1) {
+      x = Math.round(from[3] * 255);
+    } else {
+      x = 255;
+    }
+
+    return '#' + (0x100000000 + x * 0x1000000 + y)
+      .toString(16)
+      .slice(from[3] > -1 || to[3] > -1 ? 1 : 3)
+  }
+
+  function hexToRGB(hex) {
+    const shorthand = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    if(hex.match(shorthand)) {
+      hex = hex.replace(shorthand, (m, r, g, b) => {
+        return r + r + g + g + b + b
+      });
+    }
+
+    const result = hex.match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
+
+    return [
+      parseInt(result[1], 16),
+      parseInt(result[2], 16),
+      parseInt(result[3], 16),
+    ]
+  }
+
   function PrettyDate(v) {
     const pad = (v) => String(v).padStart(2, 0);
 
@@ -308,10 +352,12 @@
   exports.PrettyTime = PrettyTime;
   exports.abbreviationCase = abbreviationCase;
   exports.base36 = base36;
+  exports.blendHex = blendHex;
   exports.camelCase = camelCase;
   exports.camelKeys = camelKeys;
   exports.camelize = camelize;
   exports.clamp = clamp;
+  exports.hexToRGB = hexToRGB;
   exports.humanCase = humanCase;
   exports.imgFromBlob = imgFromBlob;
   exports.imgFromBuffer = imgFromBuffer;
