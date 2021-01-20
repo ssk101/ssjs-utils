@@ -227,7 +227,7 @@
 
     if(Array.isArray(o)) {
       o.forEach(o => camelKeys(o, seen));
-    } else if(typeof o === 'object') {
+    } else if(o != null && typeof o === 'object') {
       Object.keys(o).forEach(key => {
         var value = camelKeys(o[key], seen);
         delete o[key];
