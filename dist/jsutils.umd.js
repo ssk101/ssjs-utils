@@ -95,7 +95,7 @@
     ]
   }
 
-  function PrettyDate(v) {
+  function prettyDate(v) {
     const pad = (v) => String(v).padStart(2, 0);
 
     const date = new Date(v);
@@ -113,7 +113,7 @@
     ].join('')
   }
 
-  function PrettyTime(v) {
+  function prettyTime(v) {
     const pad = (v, c = 2) => String(v).padStart(c, 0);
 
     const date = new Date(v);
@@ -348,8 +348,6 @@
       .toUpperCase()
   }
 
-  exports.PrettyDate = PrettyDate;
-  exports.PrettyTime = PrettyTime;
   exports.abbreviationCase = abbreviationCase;
   exports.base36 = base36;
   exports.blendHex = blendHex;
@@ -366,6 +364,8 @@
   exports.kebabCase = kebabCase;
   exports.objectToStyle = objectToStyle;
   exports.objectWithPath = objectWithPath;
+  exports.prettyDate = prettyDate;
+  exports.prettyTime = prettyTime;
   exports.probability = probability;
   exports.randomInt = randomInt;
   exports.randomItems = randomItems;

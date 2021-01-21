@@ -89,7 +89,7 @@ function hexToRGB(hex) {
   ]
 }
 
-function PrettyDate(v) {
+function prettyDate(v) {
   const pad = (v) => String(v).padStart(2, 0);
 
   const date = new Date(v);
@@ -107,7 +107,7 @@ function PrettyDate(v) {
   ].join('')
 }
 
-function PrettyTime(v) {
+function prettyTime(v) {
   const pad = (v, c = 2) => String(v).padStart(c, 0);
 
   const date = new Date(v);
@@ -342,4 +342,4 @@ function base36(min, max) {
     .toUpperCase()
 }
 
-export { PrettyDate, PrettyTime, abbreviationCase, base36, blendHex, camelCase, camelKeys, camelize, clamp, hexToRGB, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, probability, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, snakeKeys, validURL, varsToHex };
+export { abbreviationCase, base36, blendHex, camelCase, camelKeys, camelize, clamp, hexToRGB, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, prettyDate, prettyTime, probability, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, snakeKeys, validURL, varsToHex };

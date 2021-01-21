@@ -1,4 +1,4 @@
-export function PrettyTime(v) {
+export function prettyTime(v) {
   const pad = (v, c = 2) => String(v).padStart(c, 0)
 
   const date = new Date(v)

@@ -15,9 +15,6 @@
     "rollup": "^2.23.0",
     "rollup-plugin-node-builtins": "^2.1.2"
   },
-  "dependencies": {
-    "moment": "^2.29.0"
-  },
   "description": "Collection of various utilities for JavaScript.",
   "repository": {
     "type": "git",
