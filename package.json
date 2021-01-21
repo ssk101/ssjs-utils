@@ -1,5 +1,5 @@
 {
-  "name": "jsutils",
+  "name": "@ssk101/jsutils",
   "version": "1.10.0",
   "author": "ssk101",
   "license": "MIT",
@@ -17,5 +17,18 @@
   },
   "dependencies": {
     "moment": "^2.29.0"
-  }
+  },
+  "description": "Collection of various utilities for JavaScript.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssk101/jsutils.git"
+  },
+  "keywords": [
+    "utilities",
+    "javascript"
+  ],
+  "bugs": {
+    "url": "https://github.com/ssk101/jsutils/issues"
+  },
+  "homepage": "https://github.com/ssk101/jsutils#readme"
 }
