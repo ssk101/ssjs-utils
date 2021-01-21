@@ -1,7 +1,7 @@
 {
   "name": "jsutils",
   "version": "1.10.0",
-  "author": "Steel Sky",
+  "author": "ssk101",
   "license": "MIT",
   "main": "dist/jsutils.cjs.js",
   "module": "dist/jsutils.esm.js",
