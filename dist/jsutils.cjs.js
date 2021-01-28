@@ -339,12 +339,13 @@ function validURL(s = '') {
   return s.match(REGEX)
 }
 
-const defaultChars = [...Array(26)].map((_, y) => String.fromCharCode(y + 65));
-const numbers = [...Array(10).keys()];
+const c = [...Array(26)].map((_, y) => String.fromCharCode(y + 65));
+const n = [...Array(10).keys()];
+const defaultChars = chars.join('') + chars.join('').toLowerCase() + n.join('');
 
-function randomChars(chars, length = 5) {
-  if(!chars || !chars.length) {
-    chars = defaultChars + defaultChars.toLowerCase() + numbers;
+function randomChars(length = 5, chars) {
+  if(!chars) {
+    chars = defaultChars;
   }
 
   const ret = [];
