@@ -341,7 +341,7 @@ function validURL(s = '') {
 
 const c = [...Array(26)].map((_, y) => String.fromCharCode(y + 65));
 const n = [...Array(10).keys()];
-const defaultChars = chars.join('') + chars.join('').toLowerCase() + n.join('');
+const defaultChars = c.join('') + c.join('').toLowerCase() + n.join('');
 
 function randomChars(length = 5, chars) {
   if(!chars) {
