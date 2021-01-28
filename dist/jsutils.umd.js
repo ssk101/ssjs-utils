@@ -341,6 +341,27 @@
     return s.match(REGEX)
   }
 
+  const defaultChars = [...Array(26)].map((_, y) => String.fromCharCode(y + 65));
+  const numbers = [...Array(10).keys()];
+
+  function randomChars(chars, length = 5) {
+    if(!chars || !chars.length) {
+      chars = defaultChars + defaultChars.toLowerCase() + numbers;
+    }
+
+    const ret = [];
+
+    while(ret.length < length) {
+      const char = chars.charAt(Math.floor(Math.random() * chars.length));
+
+      if(ret.indexOf(char) == -1) {
+        ret.push(char);
+      }
+    }
+
+    return ret.join('')
+  }
+
   function base36(min, max) {
     return Math
       .floor(Math.random() * (max - min + 1) + min)
@@ -367,6 +388,7 @@
   exports.prettyDate = prettyDate;
   exports.prettyTime = prettyTime;
   exports.probability = probability;
+  exports.randomChars = randomChars;
   exports.randomInt = randomInt;
   exports.randomItems = randomItems;
   exports.resizeWithAspectRatio = resizeWithAspectRatio;

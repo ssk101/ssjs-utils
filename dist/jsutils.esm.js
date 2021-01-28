@@ -335,6 +335,27 @@ function validURL(s = '') {
   return s.match(REGEX)
 }
 
+const defaultChars = [...Array(26)].map((_, y) => String.fromCharCode(y + 65));
+const numbers = [...Array(10).keys()];
+
+function randomChars(chars, length = 5) {
+  if(!chars || !chars.length) {
+    chars = defaultChars + defaultChars.toLowerCase() + numbers;
+  }
+
+  const ret = [];
+
+  while(ret.length < length) {
+    const char = chars.charAt(Math.floor(Math.random() * chars.length));
+
+    if(ret.indexOf(char) == -1) {
+      ret.push(char);
+    }
+  }
+
+  return ret.join('')
+}
+
 function base36(min, max) {
   return Math
     .floor(Math.random() * (max - min + 1) + min)
@@ -342,4 +363,4 @@ function base36(min, max) {
     .toUpperCase()
 }
 
-export { abbreviationCase, base36, blendHex, camelCase, camelKeys, camelize, clamp, hexToRGB, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, prettyDate, prettyTime, probability, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, snakeKeys, validURL, varsToHex };
+export { abbreviationCase, base36, blendHex, camelCase, camelKeys, camelize, clamp, hexToRGB, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, prettyDate, prettyTime, probability, randomChars, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, snakeKeys, validURL, varsToHex };
