@@ -264,6 +264,16 @@ function kebabCase(str) {
   return sentenceCase(str).replace(/[ ]/g, '-')
 }
 
+function kebabKeys(params, merge = {}) {
+  const ret = {};
+  const data = Object.assign({}, params, merge);
+  for(const k in data) {
+    ret[kebabCase(k)] = data[k];
+  }
+
+  return ret
+}
+
 function objectToStyle(obj) {
   if(!obj) return ''
   if(typeof obj === 'string') {
@@ -392,4 +402,4 @@ const base62 = {
   }
 };
 
-export { abbreviationCase, base36, base62, blendHex, camelCase, camelKeys, camelize, clamp, hexToRGB, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, objectToStyle, objectWithPath, prettyDate, prettyTime, probability, randomChars, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, snakeKeys, validURL, varsToHex };
+export { abbreviationCase, base36, base62, blendHex, camelCase, camelKeys, camelize, clamp, hexToRGB, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, kebabKeys, objectToStyle, objectWithPath, prettyDate, prettyTime, probability, randomChars, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, snakeKeys, validURL, varsToHex };

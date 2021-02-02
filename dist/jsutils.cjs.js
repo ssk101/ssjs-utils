@@ -268,6 +268,16 @@ function kebabCase(str) {
   return sentenceCase(str).replace(/[ ]/g, '-')
 }
 
+function kebabKeys(params, merge = {}) {
+  const ret = {};
+  const data = Object.assign({}, params, merge);
+  for(const k in data) {
+    ret[kebabCase(k)] = data[k];
+  }
+
+  return ret
+}
+
 function objectToStyle(obj) {
   if(!obj) return ''
   if(typeof obj === 'string') {
@@ -411,6 +421,7 @@ exports.imgFromBuffer = imgFromBuffer;
 exports.imgToDataUri = imgToDataUri;
 exports.jsonToCSS = jsonToCSS;
 exports.kebabCase = kebabCase;
+exports.kebabKeys = kebabKeys;
 exports.objectToStyle = objectToStyle;
 exports.objectWithPath = objectWithPath;
 exports.prettyDate = prettyDate;
