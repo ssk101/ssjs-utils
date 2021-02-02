@@ -1,6 +1,6 @@
 {
   "name": "@ssk101/jsutils",
-  "version": "1.14.1",
+  "version": "1.14.2",
   "author": "ssk101",
   "license": "MIT",
   "main": "dist/jsutils.cjs.js",
