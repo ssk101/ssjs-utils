@@ -320,6 +320,13 @@ function objectWithPath(wrapped, path = []) {
   })
 }
 
+function mapKeys(o = {}, cb) {
+  return Object.entries(o).reduce((acc, [k, v]) => {
+    acc[cb(k, v)] = v;
+    return acc
+  }, {})
+}
+
 function humanCase(str) {
   str || (str = '');
   return str
@@ -402,4 +409,4 @@ const base62 = {
   }
 };
 
-export { abbreviationCase, base36, base62, blendHex, camelCase, camelKeys, camelize, clamp, hexToRGB, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, kebabKeys, objectToStyle, objectWithPath, prettyDate, prettyTime, probability, randomChars, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, snakeKeys, validURL, varsToHex };
+export { abbreviationCase, base36, base62, blendHex, camelCase, camelKeys, camelize, clamp, hexToRGB, humanCase, imgFromBlob, imgFromBuffer, imgToDataUri, jsonToCSS, kebabCase, kebabKeys, mapKeys, objectToStyle, objectWithPath, prettyDate, prettyTime, probability, randomChars, randomInt, randomItems, resizeWithAspectRatio, sentenceCase, snakeCase, snakeKeys, validURL, varsToHex };

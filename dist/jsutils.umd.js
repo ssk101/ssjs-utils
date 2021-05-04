@@ -326,6 +326,13 @@
     })
   }
 
+  function mapKeys(o = {}, cb) {
+    return Object.entries(o).reduce((acc, [k, v]) => {
+      acc[cb(k, v)] = v;
+      return acc
+    }, {})
+  }
+
   function humanCase(str) {
     str || (str = '');
     return str
@@ -424,6 +431,7 @@
   exports.jsonToCSS = jsonToCSS;
   exports.kebabCase = kebabCase;
   exports.kebabKeys = kebabKeys;
+  exports.mapKeys = mapKeys;
   exports.objectToStyle = objectToStyle;
   exports.objectWithPath = objectWithPath;
   exports.prettyDate = prettyDate;
